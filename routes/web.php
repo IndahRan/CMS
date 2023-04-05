@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Auth\DashboardController;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +16,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('auth.dashboard');
+
+    auth()->logout();
+    return 'home page';
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('auth/dashboard', [DashboardController::class, 'dashboard'])->name('auth.dashboard');
