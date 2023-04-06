@@ -4,7 +4,8 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Purple Admin</title>
+
+    <title>@yield('title')</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{ asset('assets/auth/vendors/mdi/css/materialdesignicons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/auth/vendors/css/vendor.bundle.base.css') }}">
@@ -17,17 +18,12 @@
     <link rel="stylesheet" href="{{ asset('assets/auth/css/style.css') }}">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{ asset('assets/auth/images/favicon.ico') }}" />
+
+    @yield('styles')
+
   </head>
   <body>
     <div class="container-scroller">
-      <div class="row p-0 m-0 proBanner" id="proBanner">
-        <div class="col-md-12 p-0 m-0">
-          <div class="card-body card-body-padding d-flex align-items-center justify-content-between">
-            <div class="ps-lg-1">
-              <div class="d-flex align-items-center justify-content-between">
-                <p class="mb-0 font-weight-medium me-3 buy-now-text">Free 24/7 customer support, updates, and more with this template!</p>
-                <a href="https://www.bootstrapdash.com/product/purple-bootstrap-admin-template/?utm_source=organic&utm_medium=banner&utm_campaign=buynow_demo" target="_blank" class="btn me-2 buy-now-btn border-0">Get Pro</a>
-              </div>
             </div>
             <div class="d-flex align-items-center justify-content-between">
               <a href="https://www.bootstrapdash.com/product/purple-bootstrap-admin-template/"><i class="mdi mdi-home me-3 text-white"></i></a>
@@ -171,9 +167,12 @@
               </div>
             </li>
             <li class="nav-item nav-logout d-none d-lg-block">
-              <a class="nav-link" href="#">
-                <i class="mdi mdi-power"></i>
-              </a>
+                <form id="logout-form" method="post" action="{{ route('logout') }}">
+                    @csrf
+                    <a id="logout-button" class="nav-link" href="#">
+                        <i class="mdi mdi-power"></i>
+                    </a>
+                </form>
             </li>
             <li class="nav-item nav-settings d-none d-lg-block">
               <a class="nav-link" href="#">
@@ -286,15 +285,6 @@
         
         @yield('content')
 
-
-        <!-- partial:partials/_footer.html -->
-        <footer class="footer">
-            <div class="container-fluid d-flex justify-content-between">
-            <span class="text-muted d-block text-center text-sm-start d-sm-inline-block">Copyright © bootstrapdash.com 2021</span>
-            <span class="float-none float-sm-end mt-1 mt-sm-0 text-end"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin template</a> from Bootstrapdash.com</span>
-            </div>
-        </footer>
-        <!-- partial -->
         </div>
         <!-- main-panel ends -->
     </div>
@@ -317,5 +307,15 @@
     <script src="{{ asset('assets/auth/js/dashboard.js') }}"></script>
     <script src="{{ asset('assets/auth/js/todolist.js') }}"></script>
     <!-- End custom js for this page -->
+
+    @yield('scripts')
+
+    <script>
+        $(document).ready(function() {
+            $('logout-button').click(function() {
+                $('logout-form').submit();
+            });
+        });
+    </script>
     </body>
 </html>     
